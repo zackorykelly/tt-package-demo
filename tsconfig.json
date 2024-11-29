@@ -16,18 +16,13 @@
     "noImplicitOverride": true,
 
     /* If transpiling with TypeScript: */
-    "module": "NodeNext",
-    "outDir": "dist",
-    "rootDir": "src",
-    "sourceMap": true
+    "module": "Preserve", // Preserve for tsup, ESNext for TypeScript
 
-    /* AND if you're building for a library: */
-    //   "declaration": true,
-
-    /* AND if you're building for a library in a monorepo: */
-    //   "declarationMap": true,
+    "noEmit": true
 
     /* AND if your code doesn't require access to DOM API's (document, window, localstorage) */
     //   "lib": ["es2022"]
-  }
+  },
+  "include": ["src"],
+  "exclude": ["tsup.config.ts"]
 }

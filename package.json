@@ -15,18 +15,35 @@
     "type": "git",
     "url": "git+https://github.com/zackorykelly/tt-package-demo.git"
   },
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
   "type": "module",
   "license": "MIT",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.17.0",
     "prettier": "^3.4.1",
-    "typescript": "^5.7.2"
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc",
-    "ci": "npm run build",
-    "format": "prettier --write ."
-  }
+    "build": "tsup",
+    "ci": "npm run build && npm run check-format && npm run check-exports && npm run lint && npm run test",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "lint": "tsc",
+    "test": "vitest run",
+    "dev": "vitest"
+  },
+  "types": "dist/index.d.ts"
 }
